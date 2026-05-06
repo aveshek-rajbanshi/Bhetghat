@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Login — Hamro Batgat{% endblock %}
+
+{% block content %}
+    <div>
+      <div class='col-md'>
+        <div class='card'>
+            <div class='card-body'>
+
+                <h3 class='text-center mb-4'>Welcome Back 👋</h3>
+                <form method='post'>
+                    {% csrf_token %}
+
+                    <div class='input-field'>
+                      <label class='form-label'>Username</label>
+                      <input type='text' name='username' class='form-control' placeholder='Your username' autofocus>
+                    </div>
+
+                    <div class='input-field'>
+                      <label class='form-label'>Password</label>
+                      <input type='password' name='password' class='form-control' placeholder='Your password'>
+                      </div>
+
+                      <!-- Pass 'next' forward if it exists -->
+                    {% if request.GET.next %}
+                      <input type='hidden' name='next' value='{{ request.GET.next }}'>
+                    {% endif %}
+
+                    <button type='submit' class='login-btn'>Login</button>
+                </form>
+
+                <p>No account yet?<a href='{% url "register" %}'>Register here</a></p>
+            </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

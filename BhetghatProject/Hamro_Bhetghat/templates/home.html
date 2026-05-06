@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <div class='home-page'>
+      {% if request.user.is_authenticated %}
+        <h1>Welcome back, {{ request.user.username }}! 👋</h1>
+        {% comment %} <p class='text-muted'>Check who's free right now.</p> {% endcomment %}
+      {% else %}
+        <h1>Hamro Batgat 👥</h1>
+        <p class='lead text-muted'>See who among your friends is free right now.</p>
+        <div class="link-btn-wrapper">
+          <a href='#' class='btn btn-dark btn-lg me2'>Join Now</a>
+          <a href='#' class='btn btn-outline-dark btnlg'>Login</a>
+        </div>
+      {% endif %}
+    </div>
+{% endblock %}
