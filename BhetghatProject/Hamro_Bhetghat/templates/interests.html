@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}My Interests — Hamro Batgat{% endblock %}
+{% block content %}
+     <div class='row justify-content-center'>
+       <div class='col-md-6'>
+         <div class='card border-0 shadow-sm'>
+           <div class='card-body p-4'>
+             <h4 class='mb-4'>What are you into? ✨</h4>
+             <form method='post'>
+               {% csrf_token %}
+               <div class='row row-cols-2 g-3 mb-4'>
+                  {% for interest in interest_choices %}
+                    <div class='col'>
+                      <div class='form-check'>
+                       <input class='form-check-input' type='checkbox' name='interests' value='{{ interest }}' id='{{ interest }}'
+                          {% if interest in current_interests %}checked{% endif %}>
+                             <label class='form-check-label textcapitalize' for='{{ interest }}'>{{ interest }}</label>
+                      </div>
+                    </div>
+                  {% endfor %}
+               </div>
+               <div class='d-flex gap-2'>
+                 <button type='submit' class='btn btn-dark'>Save Interests</button>
+                   <a href='{% url "feed" %}' class='btn btnoutline-secondary'>Cancel</a>
+               </div>
+             </form>
+           </div>
+         </div>
+       </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,245 @@
+/* * {
+    box-sizing: border-box;
+}
+
+body {
+    background: #f5f7fb;
+    font-family: Arial, sans-serif;
+    color: #222;
+}
+*/
+.feed-container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+
+/* =========================
+   STATUS CARD
+========================= */
+
+.status-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    margin-bottom: 32px;
+}
+
+.status-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.welcome-text {
+    margin-bottom: 10px;
+}
+
+.status-text {
+    font-size: 1rem;
+}
+
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.status-badge.free {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.status-badge.busy {
+    background: #e5e7eb;
+    color: #374151;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.action-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    text-decoration: none;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.primary-btn {
+    background: #111827;
+    color: white;
+}
+
+.primary-btn:hover {
+    background: #000;
+}
+
+.secondary-btn {
+    background: white;
+    border: 1px solid #d1d5db;
+    color: #111827;
+}
+
+.secondary-btn:hover {
+    background: #f3f4f6;
+}
+
+
+/* =========================
+   INTEREST TAGS
+========================= */
+
+.my-interests,
+.interests-list {
+    margin-top: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.interest-tag,
+.interest-pill {
+    background: #111827;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+}
+
+
+/* =========================
+   FEED HEADER
+========================= */
+
+.feed-header {
+    margin-bottom: 20px;
+}
+
+
+/* =========================
+   GRID
+========================= */
+
+.people-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+
+/* =========================
+   PERSON CARD
+========================= */
+
+.person-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: 0.2s ease;
+}
+
+.person-card:hover {
+    transform: translateY(-3px);
+}
+
+.person-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+}
+
+
+/* =========================
+   AVATAR
+========================= */
+
+.avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.avatar-placeholder {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #6b7280;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+
+/* =========================
+   TEXT
+========================= */
+
+.username {
+    margin: 0;
+}
+
+.free-now {
+    color: #059669;
+    font-size: 0.9rem;
+    margin-top: 4px;
+}
+
+.bio {
+    color: #6b7280;
+    line-height: 1.5;
+}
+
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.empty-state {
+    text-align: center;
+    padding: 80px 20px;
+    color: #6b7280;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+    .status-top {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .action-buttons {
+        width: 100%;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+}

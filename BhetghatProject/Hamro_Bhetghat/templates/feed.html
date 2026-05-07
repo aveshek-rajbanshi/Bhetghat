@@ -1,13 +1,210 @@
 {% extends 'base.html' %}
-
 {% load static %}
 
-{% block title %}Who's Free — Hamro Batgat{% endblock %}
+{% block title %}
+Who's Free — Hamro Batgat
+{% endblock %}
 
 {% block content %}
-    <h2>Who's Free Right Now? 👀</h2>
-    <p class='text-muted'>
-      Logged in as <strong>{{ request.user.username }}</strong>.
-      The free/busy feed is coming in Session 16!
-    </p>
+
+<link rel="stylesheet" href="{% static 'css/feed.css' %}">
+
+<div class="feed-container">
+
+    <!-- =========================
+         MY STATUS CARD
+    ========================== -->
+
+    <div class="status-card">
+
+        <div class="status-top">
+
+            <div>
+                <h2 class="welcome-text">
+                    Hey, {{ request.user.username }} 👋
+                </h2>
+
+                <p class="status-text">
+                    You are currently
+
+                    {% if my_profile.is_free %}
+                        <span class="status-badge free">
+                            🟢 Free
+                        </span>
+                    {% else %}
+                        <span class="status-badge busy">
+                            🔴 Busy
+                        </span>
+                    {% endif %}
+                </p>
+            </div>
+
+            <div class="action-buttons">
+
+                <!-- Toggle -->
+                <form method="post" action="{% url 'toggle_status' %}">
+                    {% csrf_token %}
+
+                    <button type="submit" class="btn primary-btn">
+
+                        {% if my_profile.is_free %}
+                            Go Busy
+                        {% else %}
+                            Go Free 🟢
+                        {% endif %}
+
+                    </button>
+                </form>
+
+                <!-- Interests -->
+                <a href="{% url 'update_interests' %}" class="btn secondary-btn">
+                    ✏️ My Interests
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- Interests -->
+        {% if my_profile.get_interests_list %}
+
+        <div class="my-interests">
+
+            {% for interest in my_profile.get_interests_list %}
+                <span class="interest-tag">
+                    {{ interest }}
+                </span>
+            {% endfor %}
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- =========================
+         FEED HEADER
+    ========================== -->
+
+    <div class="feed-header">
+        <h3>
+            🟢 {{ free_count }} friend{{ free_count|pluralize }} free right now
+        </h3>
+    </div>
+
+
+    <!-- =========================
+         FREE PEOPLE GRID
+    ========================== -->
+
+    {% if free_profiles %}
+
+    <div class="people-grid">
+
+        {% for profile in free_profiles %}
+
+       <div class="person-card">
+
+    <!-- USER HEADER -->
+    <div class="person-header">
+
+        {% if profile.avatar %}
+
+            <img
+                src="{{ profile.avatar.url }}"
+                alt="avatar"
+                class="avatar"
+            >
+
+        {% else %}
+
+            <div class="avatar-placeholder">
+                {{ profile.user.username|first|upper }}
+            </div>
+
+        {% endif %}
+
+        <div>
+            <h4 class="username">
+                {{ profile.user.username }}
+            </h4>
+
+            <p class="free-now">
+                🟢 Free now
+            </p>
+        </div>
+
+    </div>
+
+
+    <!-- BIO -->
+    {% if profile.bio %}
+        <p class="bio">
+            {{ profile.bio }}
+        </p>
+    {% endif %}
+
+
+    <!-- COMMON INTERESTS -->
+    {% if profile.common_interests %}
+
+    <div class="common-interest-box">
+
+        <p class="common-label">
+            🔥 Common interests
+        </p>
+
+        <div class="common-tags">
+
+            {% for interest in profile.common_interests %}
+                <span class="common-pill">
+                    {{ interest }}
+                </span>
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- ALL INTERESTS -->
+    {% if profile.interests_list %}
+
+<div class="interests-list">
+
+    {% for interest in profile.interests_list %}
+        <span class="interest-pill">
+            {{ interest }}
+        </span>
+    {% endfor %}
+
+</div>
+
+{% endif %}
+
+</div>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div class="empty-state">
+
+        <h3>😴 No one is free right now</h3>
+
+        <p>
+            Be the first — go Free and see who joins!
+        </p>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
 {% endblock %}

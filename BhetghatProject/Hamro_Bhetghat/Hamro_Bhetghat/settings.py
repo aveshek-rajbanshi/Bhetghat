@@ -37,8 +37,38 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'accounts',
+    'django.contrib.sites', # ← required by allauth
+    'allauth', # ← core allauth
+    'allauth.account', # ← allauth account management
+    'allauth.socialaccount', # ← allauth social login
+    'allauth.socialaccount.providers.google', # ← Google provider
+    'allauth.socialaccount.providers.github',
+ 
+ 
+ 
+    # 'accounts',
+    'accounts.apps.AccountsConfig',
+    
 ]
+
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = [
+ 'django.contrib.auth.backends.ModelBackend', # regular login
+ 'allauth.account.auth_backends.AuthenticationBackend', # social login
+]
+
+SOCIALACCOUNT_PROVIDERS ={
+                            "google" :{
+                                        "SCOPE" : [
+                                        "profile",
+                                        "email "
+                                       ],
+                            "AUTH_PARAMS" :{
+                            "access_type" : "online",
+                            }
+                            }
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -48,6 +78,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
+    
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'Hamro_Bhetghat.urls'

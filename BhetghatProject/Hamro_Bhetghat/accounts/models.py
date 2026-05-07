@@ -27,8 +27,8 @@ class UserProfile(models.Model):
   def __str__(self):
     return f'{self.user.username}  -  {"Free" if self.is_free else "Busy"}'
   
-  
-  def get_interest_list(self):
+  @property
+  def get_interests_list(self):
     if not self.interests:
       return []
     
