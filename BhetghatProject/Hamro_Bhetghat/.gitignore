@@ -1,0 +1,7 @@
+# .gitignore
+# Virtual environment — never upload this (huge, platform-specific)
+venv/
+env/
+.venv/
+# Secret settings — NEVER upload
+.env
